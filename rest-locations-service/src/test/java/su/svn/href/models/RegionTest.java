@@ -24,8 +24,6 @@ public class RegionTest
 {
     public static Region testRegion = new Region(TEST_ID, TEST_REGION_NAME);
 
-    private Region region;
-
     public static void createTestTableForRegions(DatabaseClient client)
     {
         databaseClientExecuteSql(client,
@@ -41,6 +39,8 @@ public class RegionTest
             .as(StepVerifier::create)
             .verifyComplete();
     }
+
+    private Region region;
 
     @Test
     @DisplayName("is instantiated with new object")
@@ -68,7 +68,16 @@ public class RegionTest
         }
 
         @Test
-        @DisplayName("setter and getter for firstName")
+        @DisplayName("setter and getter for id")
+        void testGetSetId()
+        {
+            region.setId(TEST_ID);
+            assertThat(region).hasFieldOrPropertyWithValue("id", TEST_ID);
+            assertEquals(TEST_ID, region.getId());
+        }
+
+        @Test
+        @DisplayName("setter and getter for regionName")
         void testGetSetRegionName()
         {
             region.setRegionName(TEST);
